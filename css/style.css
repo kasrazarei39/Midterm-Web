@@ -1,0 +1,110 @@
+/* Set primary container center and use flex display */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 85vh;
+
+}
+
+/* Set background for body and set center */
+body {
+    margin: 0;
+    padding: 0%;
+    background: url("../images/background.jpg") no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Set size and color and align for searching card and profile card */
+.card {
+    height: 90%;
+    padding: 8%;
+    border-radius: 6%;
+    font-size: 25px;
+    opacity: 85%;
+    background: rgb(100, 120, 150);
+    text-align: center;
+    border: 2px dashed;
+    box-sizing: border-box;
+}
+
+/* Set top margin for input element */
+.card .input-card {
+    margin-top: 10px;
+}
+
+/* Set style for input box in search card */
+.card .input-card input {
+    padding: 5%;
+    font-size: 80%;
+    border: double;
+}
+
+/* Set style for submit button in search card */
+.card input[type=submit] {
+    border-radius: 9%;
+    background-color: #888888;
+    border: none;
+    color: #111111;
+    font-size: 80%;
+    padding: 8%;
+    position: relative;
+    top: 60px;
+    cursor: pointer;
+}
+
+/* Margin for searching box */
+.search-box {
+    margin-left: 2%;
+}
+
+/* Set hover style for submit button */
+.card input[type=submit]:hover {
+    background-color: rgba(0, 100, 100, 0.5);
+}
+
+/* Set none display the text in profile part */
+.user-container {
+    display: none;
+}
+
+/* Set center and flex container */
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Set style for user image */
+.user-image {
+    width: 200px;
+    height: 80%;
+    border-radius: 50%;
+}
+
+/* Left align for user bio */
+#user-bio {
+    text-align: left;
+}
+
+/* Alert box style. set size and color and position. */
+.alert {
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    width: 40%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    border-radius: 5%;
+    background-color: red;
+    visibility: hidden;
+}
+
+/* Set style of error message */
+.alert-message {
+    color: white;
+    font-size: 100%;
+    font-weight: bold;
+}
