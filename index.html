@@ -1,59 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Github Searcher</title>
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
-    <link rel="stylesheet" href="./css/style.css" />
-    <link rel="icon" type="image/png" href="./images/logo.png" />
-  </head>
-  <body>
-    <div class="container">
-      <div class="card">
+    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="icon" type="image/png" href="./images/logo.png"/>
+</head>
+<body>
+<div class="container">
+    <div class="card">
         <h2>User</h2>
         <div class="user-container">
-          <div class="flex-container">
-            <div>
-              <img src="" alt="" class="user-image" />
+            <div class="flex-container">
+                <div>
+                    <img src="" alt="" class="user-image"/>
+                </div>
+                <div>
+                    <p id="user-username"></p>
+                    <p id="user-blog"></p>
+                    <p id="user-location"></p>
+                </div>
             </div>
             <div>
-              <p id="user-username"></p>
-              <p id="user-blog"></p>
-              <p id="user-location"></p>
+                <p id="user-bio"></p>
+                <h4 id="favorite-language">
+                </h4>
             </div>
-          </div>
-          <div>
-            <p id="user-bio"></p>
-          </div>
         </div>
         <div class="loader">
-          <div id="loading"></div>
+            <div id="loading"></div>
         </div>
-      </div>
+    </div>
 
-      <div class="card search-box">
+    <div class="card search-box">
         <h2>Search</h2>
         <form>
-          <div class="input-card">
-            <input
-              type="text"
-              name="text"
-              id="value-input"
-              required
-              placeholder="Enter username..."
-              value=""
-            />
-          </div>
-          <input id="submit-button" type="submit" value="Submit" />
+            <div class="input-card">
+                <input
+                        type="text"
+                        name="text"
+                        id="value-input"
+                        required
+                        placeholder="Enter username..."
+                        value=""
+                />
+            </div>
+            <input id="submit-button" type="submit" value="Submit"/>
         </form>
-      </div>
-
-      <div class="alert alert-error">
-        <p class="alert-message"></p>
-      </div>
-
     </div>
-  </body>
-  <script src="./js/script.js"></script>
+
+    <div class="alert alert-error">
+        <p class="alert-message"></p>
+    </div>
+
+</div>
+</body>
+<script src="./js/script.js"></script>
 </html>

@@ -8,6 +8,7 @@ const userLocation = document.querySelector("#user-location");
 const userBio = document.querySelector("#user-bio");
 const actionMessage = document.querySelector(".alert-message");
 const actionResult = document.querySelector(".alert");
+const favoriteLanguage = document.querySelector("#favorite-language");
 
 // Send request to github for getting username profile
 // Check if username exists in local storage
@@ -35,8 +36,13 @@ async function sendRequest(e) {
         // Make json object from response
         const profile = await response.json();
 
+
+        const most_used_lang = await getFavoriteLanguage(username); // set most used language
+
+
         // Check response status
         if (response.status === 200) {
+            profile.most_used_lang = most_used_lang; // add most used language to data
             // Save profile to local storage
             await saveProfileInLocalStorage(profile);
 
@@ -56,6 +62,41 @@ async function sendRequest(e) {
     }
 }
 
+// Get user favorite language
+async function getFavoriteLanguage(username) {
+    const repositories = await fetch(
+        `https://api.github.com/users/${username}/repos?per_page=5&sort=pushed`
+    ).catch((err) => {
+        showAlert(err.message);
+    });
+
+    const userRepositories = await repositories?.json().catch((err) => {
+        showAlert(err.message);
+    });
+
+    let repositoryLanguageFrequency = 0
+    let mostFavoriteLanguages = {}
+    const freq_lang = [];
+    for (let i = 0; i < userRepositories.length; i++) {
+        const languages = userRepositories[i].language
+        if (languages === null) {
+            continue;
+        }
+        if (freq_lang[languages]) {
+            freq_lang[languages]++;
+        } else {
+            freq_lang[languages] = 1;
+        }
+        if (freq_lang[languages] === repositoryLanguageFrequency) {
+            mostFavoriteLanguages.push(languages);
+        } else if (freq_lang[languages] > repositoryLanguageFrequency) {
+            repositoryLanguageFrequency = freq_lang[languages];
+            mostFavoriteLanguages = [languages];
+        }
+    }
+    return mostFavoriteLanguages[0];
+}
+
 // Load profile from local storage
 async function getFromLocalStorage(username) {
     // Loaf profile object by username
@@ -68,6 +109,7 @@ async function getFromLocalStorage(username) {
         userName.innerHTML = profile.name ? profile.name : '...';
         userBlog.innerHTML = profile.blog ? profile.blog : '...';
         userLocation.innerHTML = profile.location ? profile.location : '...';
+        favoriteLanguage.innerHTML = profile.most_used_lang ? profile.most_used_lang : '...';
         document.querySelector(".user-container").style.display = "block";
         return true;
     }
@@ -80,6 +122,7 @@ async function showProfile(profile) {
     userBio.innerHTML = profile.bio ? profile.bio.replace("\n", "<br>") : '...';
     userLocation.innerHTML = profile.location ? profile.location : '...';
     userImage.src = profile.avatar_url ? profile.avatar_url : '...';
+    favoriteLanguage.innerHTML = profile.most_used_lang ? profile.most_used_lang : '...';
     document.querySelector(".user-container").style.display = "block";
 }
 
@@ -93,6 +136,7 @@ async function saveProfileInLocalStorage(profile) {
         bio: profile.bio ? profile.bio : '...',
         location: profile.location ? profile.location : '...',
         avatar_url: profile.avatar_url ? profile.avatar_url : '...',
+        most_used_lang: profile.most_used_lang ? profile.most_used_lang : '...',
     };
 
     // save data to local storage
